@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using ReactiveApp.ViewModels;
+using ReactiveUI.XamForms;
 using Xamarin.Forms.Xaml;
 
 namespace ReactiveApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TodosPage : ContentPage
+    public partial class TodosPage : ReactiveContentPage<TodosVM>
     {
         public TodosPage()
         {

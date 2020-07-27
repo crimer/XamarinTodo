@@ -1,15 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="ReactiveApp.Views.LoginPage">
+<reactive:ReactiveContentPage
+    x:TypeArguments="vm:LoginVM"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:reactive="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
+    xmlns:vm="clr-namespace:ReactiveApp.ViewModels" NavigationPage.HasNavigationBar="False"
+    x:Class="ReactiveApp.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+        <StackLayout VerticalOptions="CenterAndExpand" 
+                        HorizontalOptions="CenterAndExpand">
+            <Label Text="Добро пожаловать в Todo App" 
+                    HorizontalTextAlignment="Center" FontSize="20" />
+
+            <Entry Placeholder="Email" Text="{Binding Email}"/>
+            <Label x:Name="validationEmail" TextColor="Red" Margin="2"/>
+
+            <Entry Placeholder="Password" Text="{Binding Password}" />
+            <Label x:Name="validationPassword" TextColor="Red" Margin="2"/>
+
+            <Button Text="Войти" Command="{Binding LogIn}"/>
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</reactive:ReactiveContentPage>
