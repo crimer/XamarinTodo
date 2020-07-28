@@ -1,4 +1,6 @@
-﻿using ReactiveApp.ViewModels;
+﻿using ReactiveApp.Services.Auth;
+using ReactiveApp.Services.Todo;
+using ReactiveApp.ViewModels;
 using ReactiveApp.Views;
 using ReactiveUI;
 using ReactiveUI.XamForms;
@@ -16,21 +18,27 @@ namespace ReactiveApp
         {
             Router = new RoutingState();
             Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
+            RegisterServices();
             RegisterViews();
-            //RegisterServices();
+            // Первая отображенная страница это LoginVM а.к. LoginPage
+            //Router.Navigate.Execute(new LoginVM());
+            this.Router
+                .NavigateAndReset
+                .Execute(new LoginVM())
+                .Subscribe();
         }
         // Регистрируем сервис
         private void RegisterServices()
         {
-            throw new NotImplementedException();
+            Locator.CurrentMutable.Register(() => new TodoService(), typeof(ITodoService));
+            Locator.CurrentMutable.Register(() => new AuthService(), typeof(IAuthService));
         }
 
         // Связка страницы с VM
         private void RegisterViews()
         {
             Locator.CurrentMutable.Register(() => new LoginPage(), typeof(IViewFor<LoginVM>));
-            // Первая отображенная страница это LoginVM а.к. LoginPage
-            this.Router.NavigateAndReset.Execute(new LoginVM()).Subscribe();
+            Locator.CurrentMutable.Register(() => new TodosPage(), typeof(IViewFor<TodosVM>));
         }
         public Page CreateMainPage()
         {

@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:reactive="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
-    xmlns:vm="clr-namespace:ReactiveApp.ViewModels" NavigationPage.HasNavigationBar="False"
+    xmlns:vm="clr-namespace:ReactiveApp.ViewModels"
+    NavigationPage.HasNavigationBar="False"
     x:Class="ReactiveApp.Views.LoginPage">
     <ContentPage.Content>
 
@@ -19,10 +20,11 @@
             <Entry Placeholder="Email" Text="{Binding Email}"/>
             <Label x:Name="validationEmail" TextColor="Red" Margin="2"/>
 
-            <Entry Placeholder="Password" Text="{Binding Password}" />
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"/>
             <Label x:Name="validationPassword" TextColor="Red" Margin="2"/>
 
             <Button Text="Войти" Command="{Binding LogIn}"/>
+            <ActivityIndicator IsVisible="{Binding IsLoading}" Color="Red"/>
         </StackLayout>
     </ContentPage.Content>
 </reactive:ReactiveContentPage>

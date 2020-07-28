@@ -14,15 +14,16 @@ namespace ReactiveApp.Views
         {
             InitializeComponent();
             BindingContext = ViewModel = new LoginVM();
-            //this.WhenActivated(d =>
-            //{
-            //    // Подключить валидацию во View нельзя, ее приходится тут програмно 
-            //    this.BindValidation(ViewModel, vm => vm.Email, page => page.validationEmail.Text)
-            //    .DisposeWith(d);
-            //    this.BindValidation(ViewModel, vm => vm.Password, page => page.validationPassword.Text)
-            //    .DisposeWith(d);
-            //});
-            
+            this.WhenActivated(d =>
+            {
+                // Подключить валидацию во View нельзя, ее приходится тут програмно 
+                this.BindValidation(ViewModel, vm => vm.Email, page => page.validationEmail.Text)
+                .DisposeWith(d);
+
+                this.BindValidation(ViewModel, vm => vm.Password, page => page.validationPassword.Text)
+                .DisposeWith(d);
+            });
+
         }
     }
 }

@@ -10,6 +10,7 @@ namespace ReactiveApp.Views
         public TodosPage()
         {
             InitializeComponent();
+            BindingContext = ViewModel = new TodosVM();
         }
     }
 }
