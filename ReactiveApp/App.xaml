@@ -6,6 +6,38 @@
              mc:Ignorable="d"
              x:Class="ReactiveApp.App">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <Style x:Key="FrameTodoItem" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="OutlineColor" Value="LightGray" />
+                <Setter Property="BorderColor" Value="LightGray" />
+                <Setter Property="HasShadow" Value="True" />
+            </Style>
+            <Style x:Key="StackLayoutTodoItem" TargetType="FlexLayout">
+                <Setter Property="Margin" Value="15"/>
+                <Setter Property="FlexLayout.JustifyContent" Value="SpaceBetween"/>
+                <Setter Property="FlexLayout.Direction" Value="Row"/>
+            </Style>
+            <Style x:Key="StackLayoutTodoItemInfo" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Vertical"/>
+            </Style>
+            <Style x:Key="LabelTodoTitle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style x:Key="LabelTodoDate" TargetType="Label">
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="TextColor" Value="DimGray"/>
+            </Style>
+            <Style x:Key="LableEmptyTodoCollection" TargetType="Label">
+                <Setter Property="Margin" Value="10,25,10,10"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

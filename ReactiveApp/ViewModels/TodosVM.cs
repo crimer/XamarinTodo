@@ -1,6 +1,11 @@
-﻿using ReactiveUI;
+﻿using DynamicData;
+using ReactiveApp.Models;
+using ReactiveApp.Services.Todo;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Splat;
+using System;
+using System.Collections.ObjectModel;
 
 namespace ReactiveApp.ViewModels
 {
@@ -12,12 +17,18 @@ namespace ReactiveApp.ViewModels
         #endregion
 
         #region Props
-        [Reactive] public string UserName { get; private set; }
+        private readonly ReadOnlyObservableCollection<Todo> _todosList;
+        public ReadOnlyObservableCollection<Todo> Todos => _todosList;
+        private SourceList<Todo> _todos =  new SourceList<Todo>();
         #endregion
-        public TodosVM(string userName = "User", IScreen screen = null)
+
+        private ITodoService _todoService;
+        public TodosVM(IScreen screen = null, ITodoService todoService = null)
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
-            UserName = userName;
+            _todoService = todoService ?? Locator.Current.GetService<ITodoService>();
+            _todos.AddRange(_todoService.GetAllTodosAsync());
+            _todos.Connect().Bind(out _todosList).Subscribe();
         }
     }
 }

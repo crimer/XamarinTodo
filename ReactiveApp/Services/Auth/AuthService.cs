@@ -17,7 +17,9 @@ namespace ReactiveApp.Services.Auth
             {
                 return false;
             }
-            return true;
+            await Task.Delay(5000);
+            throw new Exception("test error");
+            //return true;
 
         }
 

@@ -60,13 +60,12 @@ namespace ReactiveApp.ViewModels
         }
         public async Task LogInImpl()
         {
-            await Task.Delay(2000);
             var lg = await _authService.Login(Email, Password);
             if (lg)
             {
                 Debug.WriteLine($"Is loading: {IsLoading}");
                 Debug.WriteLine($"User Loged In: {Email} - {Password}");
-                HostScreen.Router.Navigate.Execute(new TodosVM(Email)).Subscribe();
+                HostScreen.Router.Navigate.Execute(new TodosVM()).Subscribe();
             }
             else
             {
