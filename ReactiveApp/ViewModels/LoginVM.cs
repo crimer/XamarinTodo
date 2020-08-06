@@ -1,4 +1,5 @@
 ﻿using ReactiveApp.Services.Auth;
+using ReactiveApp.Views;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using ReactiveUI.Validation.Abstractions;
@@ -39,14 +40,21 @@ namespace ReactiveApp.ViewModels
             _authService = authService ?? (IAuthService)Locator.Current.GetService<IAuthService>();
 
             // Валидация логина и пароля
+            //this.ValidationRule(vm => vm.Email,
+            //    val => (val.Length > 5) && (Regex.Matches(val, "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$").Count == 1),
+            //    "Email должен быть валидным test@mail.ru");
             this.ValidationRule(vm => vm.Email,
-                val => (val.Length > 5) && (Regex.Matches(val, "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$").Count == 1),
-                "Email должен быть валидным test@mail.ru");
+                val => !string.IsNullOrWhiteSpace(val),
+                "Email не должен быть пустым");
+
+             this.ValidationRule(vm => vm.Password,
+                val => !string.IsNullOrWhiteSpace(val),
+                "Password не должен быть пустым");
 
 
-            this.ValidationRule(vm => vm.Password,
-                val => !string.IsNullOrEmpty(val) && val.Length >= 5,
-                "Пароль делжен быть длинее 5 символов");
+            //this.ValidationRule(vm => vm.Password,
+            //    val => !string.IsNullOrEmpty(val) && val.Length >= 5,
+            //    "Пароль делжен быть длинее 5 символов");
 
             var isValid = this.IsValid();
 
@@ -55,7 +63,7 @@ namespace ReactiveApp.ViewModels
                 .ToPropertyEx(this, vm => vm.IsLoading, initialValue: false);
 
             LogIn = ReactiveCommand.CreateFromTask(LogInImpl, isValid);
-            LogIn.ThrownExceptions.Subscribe(ex => this.Log().ErrorException("Error = ", ex));
+            LogIn.ThrownExceptions.Select(ex => ex.Message).Subscribe(ex => Debug.WriteLine(ex));
 
         }
         public async Task LogInImpl()
@@ -65,7 +73,7 @@ namespace ReactiveApp.ViewModels
             {
                 Debug.WriteLine($"Is loading: {IsLoading}");
                 Debug.WriteLine($"User Loged In: {Email} - {Password}");
-                HostScreen.Router.Navigate.Execute(new TodosVM()).Subscribe();
+                HostScreen.Router.Navigate.Execute(new MainPageVM()).Subscribe();
             }
             else
             {

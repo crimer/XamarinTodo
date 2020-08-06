@@ -14,6 +14,8 @@
         <StackLayout>
             <Label Text="{Binding UserName}"
                 HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding Title}"
+                HorizontalOptions="CenterAndExpand" />
             <CollectionView ItemsSource="{Binding Todos}" Margin="15,0,15,15">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>

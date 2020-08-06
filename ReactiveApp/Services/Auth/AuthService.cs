@@ -8,18 +8,16 @@ namespace ReactiveApp.Services.Auth
     {
         public async Task<bool> Login(string email, string password)
         {
-            if (!(email.Length > 5)
-                || !(Regex.Matches(email, "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$").Count == 1))
+            if (!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(email))
+            {
+                await Task.Delay(2000);
+                return true;
+            }
+            else
             {
                 return false;
             }
-            if (string.IsNullOrEmpty(password) || !(password.Length >= 5))
-            {
-                return false;
-            }
-            await Task.Delay(5000);
-            throw new Exception("test error");
-            //return true;
+
 
         }
 

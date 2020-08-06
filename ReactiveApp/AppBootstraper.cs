@@ -21,11 +21,7 @@ namespace ReactiveApp
             RegisterServices();
             RegisterViews();
             // Первая отображенная страница это LoginVM а.к. LoginPage
-            //Router.Navigate.Execute(new LoginVM());
-            this.Router
-                .NavigateAndReset
-                .Execute(new LoginVM())
-                .Subscribe();
+            Router.Navigate.Execute(new LoginVM()).Subscribe();
         }
         // Регистрируем сервис
         private void RegisterServices()
@@ -39,6 +35,7 @@ namespace ReactiveApp
         {
             Locator.CurrentMutable.Register(() => new LoginPage(), typeof(IViewFor<LoginVM>));
             Locator.CurrentMutable.Register(() => new TodosPage(), typeof(IViewFor<TodosVM>));
+            Locator.CurrentMutable.Register(() => new MainPage(), typeof(IViewFor<MainPageVM>));
         }
         public Page CreateMainPage()
         {

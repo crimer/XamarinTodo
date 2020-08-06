@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<reactive:ReactiveTabbedPage 
+        x:TypeArguments="vm:MainPageVM"
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:pages="clr-namespace:ReactiveApp.Views"
+        xmlns:reactive="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
+        xmlns:vm="clr-namespace:ReactiveApp.ViewModels"
+        x:Class="ReactiveApp.Views.MainPage" x:Name="TabbedPage">
+    <!--<pages:TodosPage x:Name="todosPage" Title="Todos" />
+    <pages:ButtonPage x:Name="buttonPage" Title="Button"/>-->
+    <ContentPage Title="Todos">
+        <StackLayout>
+            <Label Text="{Binding UserName}"
+                HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding Title}"
+                HorizontalOptions="CenterAndExpand" />
+            <CollectionView ItemsSource="{Binding Todos}" Margin="15,0,15,15">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.Header>
+                    <Label Text="Мои задачи"
+                           TextColor="Black"
+                           FontSize="Large"
+                           FontAttributes="Bold" />
+                </CollectionView.Header>
+
+
+                <CollectionView.EmptyViewTemplate>
+                    <DataTemplate>
+                        <Label Text="Нет задач" Style="{StaticResource LableEmptyTodoCollection}"/>
+                    </DataTemplate>
+                </CollectionView.EmptyViewTemplate>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout HorizontalOptions="Center" >
+                            <Frame Style="{StaticResource FrameTodoItem}">
+                                <FlexLayout Style="{StaticResource StackLayoutTodoItem}">
+                                    <StackLayout Style="{StaticResource StackLayoutTodoItemInfo}">
+                                        <Label Text="{Binding Title}" Style="{StaticResource LabelTodoTitle}" />
+                                        <Label Text="{Binding CreatedAt}" Style="{StaticResource LabelTodoDate}" />
+                                    </StackLayout>
+                                    <Switch IsToggled="True"/>
+                                </FlexLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Title="Buttons">
+        <StackLayout>
+            <Label Text="Buttons"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <CollectionView ItemsSource="{Binding Todos}" Margin="15,0,15,15">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.Header>
+                    <Label Text="Мои задачи"
+                           TextColor="Black"
+                           FontSize="Large"
+                           FontAttributes="Bold" />
+                </CollectionView.Header>
+
+
+                <CollectionView.EmptyViewTemplate>
+                    <DataTemplate>
+                        <Label Text="Нет задач" Style="{StaticResource LableEmptyTodoCollection}"/>
+                    </DataTemplate>
+                </CollectionView.EmptyViewTemplate>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout HorizontalOptions="Center" >
+                            <Frame Style="{StaticResource FrameTodoItem}">
+                                <FlexLayout Style="{StaticResource StackLayoutTodoItem}">
+                                    <StackLayout Style="{StaticResource StackLayoutTodoItemInfo}">
+                                        <Label Text="{Binding Title}" Style="{StaticResource LabelTodoTitle}" />
+                                        <Label Text="{Binding CreatedAt}" Style="{StaticResource LabelTodoDate}" />
+                                    </StackLayout>
+                                    <Switch IsToggled="True"/>
+                                </FlexLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage>
+</reactive:ReactiveTabbedPage>
