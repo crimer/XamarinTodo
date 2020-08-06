@@ -7,6 +7,7 @@ using Splat;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Reactive.Threading.Tasks;
 
 namespace ReactiveApp.ViewModels
 {
@@ -29,7 +30,8 @@ namespace ReactiveApp.ViewModels
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
             _todoService = todoService ?? Locator.Current.GetService<ITodoService>();
-            _todos.AddRange(_todoService.GetAllTodosAsync());
+            var items = _todoService.GetTodosAsync();
+            _todos = items;
             _todos
                 // Трансформируем источник в наблюдаемый набор изменений.
                 // Имеем тип IObservable<IChangeSet<Trade, long>>
