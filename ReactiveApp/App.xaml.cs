@@ -7,9 +7,11 @@ namespace ReactiveApp
         public App()
         {
             InitializeComponent();
-            var bootstraper = new AppBootstraper();
+            //var bootstraper = new AppLocator();
             // главная "Начальная" страница
-            MainPage = bootstraper.CreateMainPage();
+            //MainPage = bootstraper.CreateMainPage();
+            AppLocator.Init();
+            MainPage = new AppShell();
         }
 
         protected override void OnStart()

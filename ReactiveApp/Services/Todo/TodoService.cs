@@ -7,10 +7,17 @@ namespace ReactiveApp.Services.Todo
 {
     public class TodoService : ITodoService
     {
+<<<<<<< HEAD
         readonly List<Models.Todo> _todos;
         public TodoService()
         {
             _todos = new List<Models.Todo>()
+=======
+        private readonly List<Models.Todo> todos;
+        public TodoService()
+        {
+            todos = new List<Models.Todo>()
+>>>>>>> 5e81c7cf63e07d3ae5ee97dc6b11a8aa55fd53e3
             {
                 new Models.Todo{Id=Guid.NewGuid().ToString(),CreatedAt = DateTime.Now, Description="Decs_1",Title="Sleep",IsComplete = false},
                 new Models.Todo{Id=Guid.NewGuid().ToString(),CreatedAt = DateTime.Now, Description="Decs_2",Title="Buy milk",IsComplete = false},
@@ -24,6 +31,7 @@ namespace ReactiveApp.Services.Todo
                 new Models.Todo{Id=Guid.NewGuid().ToString(),CreatedAt = DateTime.Now, Description="Decs_10",Title="Complete first task",IsComplete = false},
             };
         }
+<<<<<<< HEAD
 
         public async Task<bool> AddTodoAsync(Models.Todo item)
         {
@@ -54,6 +62,38 @@ namespace ReactiveApp.Services.Todo
             var oldTodo = await GetTodoByIdAsync(newTodo.Id);
             _todos.Remove(oldTodo);
             _todos.Add(newTodo);
+=======
+        public async Task<bool> AddTodoAsync(Models.Todo todo)
+        {
+            todos.Add(todo);
+            return await Task.FromResult(true);
+        }
+
+        public async Task<bool> DeleteTodoAsync(string id)
+        {
+            var item = await GetTodoByIdAsync(id);
+            todos.Remove(item);
+            return await Task.FromResult(true);
+        }
+
+
+        public async Task<Models.Todo> GetTodoByIdAsync(string id)
+        {
+            var item = todos.Where(t => t.Id == id).FirstOrDefault();
+            return await Task.FromResult(item);
+        }
+
+        public async Task<IEnumerable<Models.Todo>> GetTodosAsync(bool forceRefresh = false)
+        {
+            return await Task.FromResult(todos);
+        }
+
+        public async Task<bool> UpdateTodoAsync(Models.Todo newTodo)
+        {
+            var oldItem = await GetTodoByIdAsync(newTodo.Id);
+            todos.Remove(oldItem);
+            todos.Add(newTodo);
+>>>>>>> 5e81c7cf63e07d3ae5ee97dc6b11a8aa55fd53e3
             return await Task.FromResult(true);
         }
     }

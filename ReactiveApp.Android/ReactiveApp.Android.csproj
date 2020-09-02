@@ -66,8 +66,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <AndroidAsset Include="Assets\FontAwesome5FreeRegular400.otf" />
     <AndroidAsset Include="Assets\FontAwesome5FreeSolid900.otf" />
+=======
+    <AndroidAsset Include="Assets\Font Awesome 5 Free-Regular-400.otf" />
+>>>>>>> 5e81c7cf63e07d3ae5ee97dc6b11a8aa55fd53e3
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
