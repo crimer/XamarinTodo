@@ -5,13 +5,11 @@ using Xamarin.Forms.Xaml;
 namespace ReactiveApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : ReactiveTabbedPage<MainPageVM>
+    public partial class AboutPage : ReactiveContentPage<AboutVM>
     {
-        public MainPage()
+        public AboutPage()
         {
             InitializeComponent();
-            BindingContext = ViewModel = new MainPageVM();
-
         }
     }
 }

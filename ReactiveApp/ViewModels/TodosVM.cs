@@ -2,7 +2,6 @@
 using ReactiveApp.Models;
 using ReactiveApp.Services.Todo;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using Splat;
 using System;
 using System.Collections.ObjectModel;
@@ -10,28 +9,35 @@ using System.Diagnostics;
 
 namespace ReactiveApp.ViewModels
 {
-    public class TodosVM : ReactiveObject
+    public class TodosVM : BaseVM, IRoutableViewModel
     {
         #region Navigation
-        public string UrlPathSegment => "TodosPage";
+        public string UrlPathSegment => "Todos page";
         public IScreen HostScreen { get; }
-        public string Title { get; set; } = "Hello todos page";
         #endregion
 
-        //#region Props
-        private readonly ReadOnlyObservableCollection<Todo> _todosList;
         public ReadOnlyObservableCollection<Todo> Todos => _todosList;
-        private SourceList<Todo> _todos = new SourceList<Todo>();
-        //#endregion
+        private readonly ReadOnlyObservableCollection<Todo> _todosList;
 
-        //private ITodoService _todoService;
+        // Объявляем изменяемый список задач
+        private SourceList<Todo> _todos = new SourceList<Todo>();
+        private ITodoService _todoService;
         public TodosVM(IScreen screen = null, ITodoService todoService = null)
         {
+            Title = "Задачи";
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
-            //Todos = taskList;
-            //_todoService = todoService ?? Locator.Current.GetService<ITodoService>();
+            _todoService = todoService ?? Locator.Current.GetService<ITodoService>();
             //_todos = taskList;
             //_todos.Connect().Bind(out _todosList).Subscribe();
+            _todos.AddRange(_todoService.GetTodosAsync().Result);
+            _todos
+                // Трансформируем источник в наблюдаемый набор изменений.
+                // Имеем тип IObservable<IChangeSet<Trade, long>>
+                .Connect()
+                // Привяжем список объектов
+                // к коллекции из System.Collections.ObjectModel.
+                .Bind(out _todosList).Subscribe();
+            Debug.WriteLine(Todos);
             Debug.WriteLine("Todos page");
         }
     }

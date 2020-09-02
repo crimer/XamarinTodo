@@ -15,28 +15,23 @@ using System.Threading.Tasks;
 
 namespace ReactiveApp.ViewModels
 {
-    public class LoginVM : ReactiveObject, IRoutableViewModel, IValidatableViewModel
+    public class LoginVM : BaseVM, IRoutableViewModel, IValidatableViewModel
     {
-        #region Navigations
-        public string UrlPathSegment => "LoginPage";
+        public string UrlPathSegment => "Login Page";
         public IScreen HostScreen { get; }
-        #endregion
-
-        #region Commands
         public ReactiveCommand<Unit, Unit> LogIn { get; private set; }
-        #endregion
-
         #region Props
         public ValidationContext ValidationContext { get; } = new ValidationContext();
         [Reactive] public string Email { get; set; } = string.Empty;
         [Reactive] public string Password { get; set; } = string.Empty;
         [ObservableAsProperty] public bool IsLoading { get; set; }
+
         #endregion
         private IAuthService _authService;
         public LoginVM(IScreen screen = null, IAuthService authService = null)
         {
+            Title = "Вход";
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
-
             _authService = authService ?? (IAuthService)Locator.Current.GetService<IAuthService>();
 
             // Валидация логина и пароля

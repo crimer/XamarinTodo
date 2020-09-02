@@ -6,16 +6,12 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="Задачи"
+    Title="{Binding Title}"
     xmlns:reactive="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
     xmlns:vm="clr-namespace:ReactiveApp.ViewModels"
     x:Class="ReactiveApp.Views.TodosPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding UserName}"
-                HorizontalOptions="CenterAndExpand" />
-            <Label Text="{Binding Title}"
-                HorizontalOptions="CenterAndExpand" />
             <CollectionView ItemsSource="{Binding Todos}" Margin="15,0,15,15">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>

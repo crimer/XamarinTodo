@@ -24,7 +24,6 @@
             <Label x:Name="validationPassword" TextColor="Red" Margin="2"/>
 
             <Button Text="Войти" Command="{Binding LogIn}"/>
-            <ActivityIndicator IsVisible="{Binding IsLoading}" Color="Red"/>
         </StackLayout>
     </ContentPage.Content>
 </reactive:ReactiveContentPage>
